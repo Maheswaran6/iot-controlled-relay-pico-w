@@ -7,29 +7,30 @@
 
 <style>
 :root{
-  --blue1:#0a58ca;
-  --blue2:#2563eb;
+  --c1:#7c3aed;
+  --c2:#2563eb;
+  --c3:#22d3ee;
   --dark:#020617;
   --card:#ffffff;
-  --text:#1f2937;
 }
 
 *{box-sizing:border-box;}
 
+html{scroll-behavior:smooth;}
+
 body{
   margin:0;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  background:#f1f5f9;
-  color:var(--text);
+  background:#020617;
+  color:#e5e7eb;
 }
 
-/* ===== HERO (LIVE BACKGROUND) ===== */
+/* ===== LIVE HERO ===== */
 .hero{
   height:100vh;
-  background:linear-gradient(270deg,#0a58ca,#2563eb,#38bdf8);
+  background:linear-gradient(270deg,var(--c1),var(--c2),var(--c3));
   background-size:600% 600%;
-  animation:gradientMove 12s ease infinite;
-  color:white;
+  animation:bgMove 12s ease infinite;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -38,13 +39,13 @@ body{
   overflow:hidden;
 }
 
-@keyframes gradientMove{
+@keyframes bgMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-/* floating dots (IoT feel) */
+/* floating particles */
 .hero span{
   position:absolute;
   width:6px;
@@ -55,7 +56,7 @@ body{
 }
 
 @keyframes float{
-  from{transform:translateY(100vh);}
+  from{transform:translateY(110vh);}
   to{transform:translateY(-10vh);}
 }
 
@@ -66,46 +67,76 @@ body{
 }
 
 .hero h1{
-  font-size:42px;
+  font-size:44px;
   margin-bottom:10px;
 }
 
 .hero p{
   font-size:20px;
+  margin-bottom:30px;
   opacity:0.95;
 }
 
-/* ===== SECTIONS ===== */
+.btn{
+  display:inline-block;
+  padding:14px 26px;
+  border-radius:30px;
+  margin:8px;
+  font-weight:600;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:white;
+  color:#020617;
+}
+
+.btn-primary:hover{
+  transform:scale(1.05);
+}
+
+.btn-outline{
+  border:2px solid white;
+  color:white;
+}
+
+.btn-outline:hover{
+  background:white;
+  color:#020617;
+}
+
+/* ===== CONTENT ===== */
 .container{
   max-width:1100px;
   margin:auto;
-  padding:50px 20px;
+  padding:70px 20px;
 }
 
 .card{
-  background:var(--card);
+  background:#020617;
+  border:1px solid #1e293b;
+  border-radius:16px;
   padding:30px;
-  margin-bottom:30px;
-  border-radius:14px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  margin-bottom:40px;
+  box-shadow:0 0 40px rgba(124,58,237,0.15);
 }
 
 .card h2{
   margin-top:0;
-  color:var(--blue1);
+  color:#38bdf8;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  gap:25px;
 }
 
 .badge{
   display:inline-block;
-  background:#e0e7ff;
-  color:#1e40af;
-  padding:8px 16px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  padding:8px 18px;
   border-radius:20px;
   margin:6px;
   font-size:14px;
@@ -113,49 +144,54 @@ body{
 
 /* ===== FOOTER ===== */
 footer{
-  background:var(--dark);
-  color:#cbd5f5;
+  background:black;
   text-align:center;
   padding:20px;
+  color:#94a3b8;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LIVE HERO -->
-<div class="hero">
+<!-- HERO -->
+<section class="hero">
   <div class="hero-content">
     <h1>IoT Controlled Relay using Raspberry Pi Pico W</h1>
-    <p>Live IoT-inspired web interface for remote electrical appliance control</p>
+    <p>Live IoT-inspired web interface for smart and remote electrical control</p>
+
+    <a href="#contact" class="btn btn-primary">Contact</a>
+    <a href="https://www.linkedin.com/in/maheswaran-s-4a9ab9326"
+       target="_blank" class="btn btn-outline">LinkedIn</a>
   </div>
 
-  <!-- floating dots -->
-  <span style="left:10%;animation-duration:12s"></span>
-  <span style="left:25%;animation-duration:9s"></span>
-  <span style="left:40%;animation-duration:14s"></span>
-  <span style="left:60%;animation-duration:11s"></span>
-  <span style="left:75%;animation-duration:10s"></span>
-  <span style="left:90%;animation-duration:13s"></span>
-</div>
+  <!-- particles -->
+  <span style="left:10%"></span>
+  <span style="left:25%;animation-duration:14s"></span>
+  <span style="left:40%;animation-duration:9s"></span>
+  <span style="left:55%;animation-duration:12s"></span>
+  <span style="left:70%;animation-duration:10s"></span>
+  <span style="left:85%;animation-duration:15s"></span>
+</section>
 
+<!-- CONTENT -->
 <div class="container">
 
 <div class="card">
 <h2>Project Overview</h2>
 <p>
-This project implements an <strong>IoT Controlled Relay System</strong> using
-Raspberry Pi Pico W with built-in WiFi. Users can remotely switch electrical
-appliances such as fans or lights through a web interface, demonstrating
-real-world IoT automation.
+This project implements a <strong>smart IoT-based relay control system</strong>
+using Raspberry Pi Pico W with built-in WiFi. Electrical appliances such as fans
+and lights can be controlled remotely using a secure web interface.
 </p>
 </div>
 
 <div class="card">
 <h2>Problem Statement</h2>
 <p>
-Manual control of electrical appliances leads to inconvenience and energy loss.
-A smart, low-cost IoT-based system is required for remote monitoring and control.
+Traditional manual switching causes inconvenience and energy wastage.
+A smart IoT solution is required for remote, efficient, and reliable control
+of electrical appliances.
 </p>
 </div>
 
@@ -164,7 +200,7 @@ A smart, low-cost IoT-based system is required for remote monitoring and control
 <ul>
 <li>Design IoT-based relay control using Pico W</li>
 <li>Enable remote ON/OFF switching via WiFi</li>
-<li>Demonstrate practical IoT automation</li>
+<li>Demonstrate real-time IoT automation</li>
 </ul>
 </div>
 
@@ -183,29 +219,32 @@ A smart, low-cost IoT-based system is required for remote monitoring and control
 <ul>
 <li>MicroPython</li>
 <li>Thonny IDE</li>
-<li>Web Browser Interface</li>
+<li>Web Interface</li>
 </ul>
 </div>
 </div>
 
 <div class="card">
-<h2>Advantages</h2>
-<span class="badge">Live IoT UI</span>
-<span class="badge">Remote Access</span>
+<h2>Why This Project?</h2>
+<span class="badge">Live UI</span>
+<span class="badge">Colourful Design</span>
+<span class="badge">IoT Automation</span>
 <span class="badge">Energy Efficient</span>
-<span class="badge">Low Cost</span>
 </div>
 
-<div class="card">
-<h2>Team & Institution</h2>
+<div class="card" id="contact">
+<h2>Contact & Team</h2>
 <p>
 <strong>Team Leader:</strong> MAHESWARAN S<br><br>
+
 <strong>Team Members:</strong><br>
 ADITYA J<br>
 EMAM MAHATHEE S<br>
 GOKUL RAJ U<br><br>
+
 <strong>College:</strong> Nehru Institute Of Engineering And Technology<br>
-<strong>Department:</strong> B.E – Electronics and Communication Engineering<br>
+<strong>Department:</strong> B.E – Electronics and Communication Engineering<br><br>
+
 <strong>Email:</strong> smaheswaran577@gmail.com
 </p>
 </div>
