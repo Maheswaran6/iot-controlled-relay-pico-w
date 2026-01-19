@@ -2,77 +2,97 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IoT Controlled Relay | Raspberry Pi Pico W</title>
+<title>IoT Controlled Relay | Pico W</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 :root{
-  --primary:#0a58ca;
-  --secondary:#1f2937;
-  --bg:#f8fafc;
+  --blue1:#0a58ca;
+  --blue2:#2563eb;
+  --dark:#020617;
   --card:#ffffff;
-  --text:#374151;
+  --text:#1f2937;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  background:var(--bg);
+  background:#f1f5f9;
   color:var(--text);
-  line-height:1.7;
 }
 
-header{
-  background:linear-gradient(135deg,#0a58ca,#2563eb);
+/* ===== HERO (LIVE BACKGROUND) ===== */
+.hero{
+  height:100vh;
+  background:linear-gradient(270deg,#0a58ca,#2563eb,#38bdf8);
+  background-size:600% 600%;
+  animation:gradientMove 12s ease infinite;
   color:white;
-  padding:60px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
+  position:relative;
+  overflow:hidden;
 }
 
-header h1{
-  margin:0;
-  font-size:34px;
-  font-weight:700;
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-header p{
-  margin-top:12px;
-  font-size:18px;
+/* floating dots (IoT feel) */
+.hero span{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:rgba(255,255,255,0.8);
+  border-radius:50%;
+  animation:float 10s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+.hero-content{
+  z-index:2;
+  max-width:900px;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:20px;
   opacity:0.95;
 }
 
+/* ===== SECTIONS ===== */
 .container{
-  max-width:1000px;
+  max-width:1100px;
   margin:auto;
-  padding:30px 15px;
+  padding:50px 20px;
 }
 
 .card{
   background:var(--card);
-  padding:28px;
-  margin-bottom:28px;
-  border-radius:12px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.06);
+  padding:30px;
+  margin-bottom:30px;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
 }
 
 .card h2{
   margin-top:0;
-  color:var(--secondary);
-  font-size:24px;
-  border-left:5px solid var(--primary);
-  padding-left:12px;
-}
-
-ul{
-  padding-left:20px;
-}
-
-ul li{
-  margin-bottom:8px;
+  color:var(--blue1);
 }
 
 .grid{
@@ -85,171 +105,115 @@ ul li{
   display:inline-block;
   background:#e0e7ff;
   color:#1e40af;
-  padding:6px 14px;
+  padding:8px 16px;
   border-radius:20px;
+  margin:6px;
   font-size:14px;
-  margin:6px 6px 0 0;
 }
 
-a{
-  color:var(--primary);
-  text-decoration:none;
-  font-weight:600;
-}
-
-a:hover{
-  text-decoration:underline;
-}
-
+/* ===== FOOTER ===== */
 footer{
-  background:#020617;
+  background:var(--dark);
   color:#cbd5f5;
   text-align:center;
   padding:20px;
-  font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>IoT Controlled Relay using Raspberry Pi Pico W</h1>
-  <p>Professional IoT-based solution for remote electrical appliance control</p>
-</header>
+<!-- LIVE HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>IoT Controlled Relay using Raspberry Pi Pico W</h1>
+    <p>Live IoT-inspired web interface for remote electrical appliance control</p>
+  </div>
+
+  <!-- floating dots -->
+  <span style="left:10%;animation-duration:12s"></span>
+  <span style="left:25%;animation-duration:9s"></span>
+  <span style="left:40%;animation-duration:14s"></span>
+  <span style="left:60%;animation-duration:11s"></span>
+  <span style="left:75%;animation-duration:10s"></span>
+  <span style="left:90%;animation-duration:13s"></span>
+</div>
 
 <div class="container">
 
 <div class="card">
-  <h2>Project Overview</h2>
-  <p>
-    This project presents an <strong>IoT Controlled Relay System</strong> using
-    Raspberry Pi Pico W with built-in WiFi capability. The system allows users to
-    remotely switch electrical appliances such as fans and lights through a secure
-    web interface, improving convenience and energy efficiency.
-  </p>
+<h2>Project Overview</h2>
+<p>
+This project implements an <strong>IoT Controlled Relay System</strong> using
+Raspberry Pi Pico W with built-in WiFi. Users can remotely switch electrical
+appliances such as fans or lights through a web interface, demonstrating
+real-world IoT automation.
+</p>
 </div>
 
 <div class="card">
-  <h2>Problem Statement</h2>
-  <p>
-    Conventional electrical systems rely on manual switching, leading to
-    inconvenience, lack of remote access, and unnecessary power consumption.
-    A reliable, low-cost IoT-based solution is required to enable smart
-    control of electrical appliances.
-  </p>
+<h2>Problem Statement</h2>
+<p>
+Manual control of electrical appliances leads to inconvenience and energy loss.
+A smart, low-cost IoT-based system is required for remote monitoring and control.
+</p>
 </div>
 
 <div class="card">
-  <h2>Objectives</h2>
-  <ul>
-    <li>Design an IoT-based relay control system using Raspberry Pi Pico W</li>
-    <li>Enable remote appliance control through WiFi</li>
-    <li>Demonstrate practical IoT implementation in home automation</li>
-  </ul>
+<h2>Objectives</h2>
+<ul>
+<li>Design IoT-based relay control using Pico W</li>
+<li>Enable remote ON/OFF switching via WiFi</li>
+<li>Demonstrate practical IoT automation</li>
+</ul>
 </div>
 
 <div class="card grid">
-  <div>
-    <h2>Hardware Components</h2>
-    <ul>
-      <li>Raspberry Pi Pico W</li>
-      <li>Relay Module</li>
-      <li>Fan / Light (Load)</li>
-      <li>Power Supply</li>
-      <li>Connecting Wires</li>
-    </ul>
-  </div>
-
-  <div>
-    <h2>Software Tools</h2>
-    <ul>
-      <li>MicroPython</li>
-      <li>Thonny IDE</li>
-      <li>Web Browser Interface</li>
-    </ul>
-  </div>
+<div>
+<h2>Hardware</h2>
+<ul>
+<li>Raspberry Pi Pico W</li>
+<li>Relay Module</li>
+<li>Fan / Light</li>
+<li>Power Supply</li>
+</ul>
+</div>
+<div>
+<h2>Software</h2>
+<ul>
+<li>MicroPython</li>
+<li>Thonny IDE</li>
+<li>Web Browser Interface</li>
+</ul>
+</div>
 </div>
 
 <div class="card">
-  <h2>Working Principle</h2>
-  <p>
-    The Raspberry Pi Pico W connects to a WiFi network and hosts a control webpage.
-    User commands sent through the browser are processed by the Pico W, which
-    activates the relay module to switch the connected electrical appliance
-    ON or OFF.
-  </p>
+<h2>Advantages</h2>
+<span class="badge">Live IoT UI</span>
+<span class="badge">Remote Access</span>
+<span class="badge">Energy Efficient</span>
+<span class="badge">Low Cost</span>
 </div>
 
 <div class="card">
-  <h2>Advantages</h2>
-  <span class="badge">Low Cost</span>
-  <span class="badge">Remote Access</span>
-  <span class="badge">Energy Efficient</span>
-  <span class="badge">User Friendly</span>
-</div>
-
-<div class="card">
-  <h2>Applications</h2>
-  <ul>
-    <li>Smart Home Automation</li>
-    <li>Remote Fan and Light Control</li>
-    <li>IoT Training and Educational Projects</li>
-    <li>Energy Management Systems</li>
-  </ul>
-</div>
-
-<div class="card">
-  <h2>Project Links</h2>
-  <ul>
-    <li>
-      GitHub Repository:
-      <a href="https://github.com/maheswaran6/iot-controlled-relay-pico-w" target="_blank">
-        View Source Code
-      </a>
-    </li>
-    <li>
-      Demo Video:
-      <a href="#" target="_blank">Add Demo Video Link</a>
-    </li>
-  </ul>
-</div>
-
-<div class="card">
-  <h2>Team & Institution</h2>
-  <p>
-    <strong>Team Leader:</strong> MAHESWARAN S<br><br>
-
-    <strong>Team Members:</strong><br>
-    ADITYA J<br>
-    EMAM MAHATHEE S<br>
-    GOKUL RAJ U<br><br>
-
-    <strong>College:</strong><br>
-    Nehru Institute Of Engineering And Technology<br><br>
-
-    <strong>Department:</strong><br>
-    B.E – Electronics and Communication Engineering<br><br>
-
-    <strong>Email:</strong>
-    <a href="mailto:smaheswaran577@gmail.com">smaheswaran577@gmail.com</a>
-  </p>
-</div>
-
-<div class="card">
-  <h2>Conclusion</h2>
-  <p>
-    This IoT Controlled Relay project demonstrates a professional and practical
-    implementation of IoT technology for smart automation. It provides a strong
-    foundation for future enhancements such as mobile applications, cloud
-    integration, and advanced automation systems.
-  </p>
+<h2>Team & Institution</h2>
+<p>
+<strong>Team Leader:</strong> MAHESWARAN S<br><br>
+<strong>Team Members:</strong><br>
+ADITYA J<br>
+EMAM MAHATHEE S<br>
+GOKUL RAJ U<br><br>
+<strong>College:</strong> Nehru Institute Of Engineering And Technology<br>
+<strong>Department:</strong> B.E – Electronics and Communication Engineering<br>
+<strong>Email:</strong> smaheswaran577@gmail.com
+</p>
 </div>
 
 </div>
 
 <footer>
-  © 2026 | IoT Controlled Relay Project | Raspberry Pi Pico W
+© 2026 | IoT Controlled Relay | Raspberry Pi Pico W
 </footer>
 
 </body>
